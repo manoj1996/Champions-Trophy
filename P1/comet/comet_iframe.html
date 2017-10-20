@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>COMET - IFRAMES</title>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<script type="text/javascript">
+	
+		obj = {
+			timer: null,
+			makeComet: function() {
+				ifr = document.getElementById("ifr");
+				ifr.src = "http://localhost/icc/P1/comet/comet.php";
+				//Trigger the heartbeat
+				obj.heartbeat();
+			},
+		
+			//Fuction to show the file update time
+			showUptTime: function(str) {
+				newdiv = document.createElement("div");
+				newdiv.innerHTML = str;
+				document.body.appendChild(newdiv);
+			},
+			
+			//Function to let us know that the server is alive
+			heartbeat: function() {
+				if(obj.timer)
+				{
+					clearTimeout(obj.timer);
+				}
+				obj.timer = setTimeout(obj.makeComet, 10000); // what if update happens within 10 seconds of next heartbeat?
+				// as script exits, store modification time in file
+				// when server exits, you should use this modification time
+			}
+		};
+	</script>
+</head>
+<body>
+	<input type="button" class="btn btn-primary" value="Go live" onclick="obj.makeComet()"/><p>
+	<iframe width="200" height="200" id="ifr" hidden/>
+</body>
+</html>

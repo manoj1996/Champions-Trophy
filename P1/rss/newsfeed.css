@@ -1,0 +1,22 @@
+body{
+	background-image:url("logo.jpg");
+}
+#outer
+{
+	background-color:#f9f9f9;
+	padding-top:10px;
+	border-top: 2px solid red;
+	border-bottom: 2px solid red;
+	padding-left:100%;
+	white-space: nowrap;
+	height: 425px;
+}
+
+#inner
+{
+	position: absolute;
+}
+
+
+	
+	

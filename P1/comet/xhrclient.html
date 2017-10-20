@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>COMET - XHR</title>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<style rel="stylesheet">
+	body{
+		background-image: url("logo.jpg");
+	}
+	tbody{
+		background-color:white;
+	}
+	</style>
+	<script type="text/javascript" src="jquery-3.1.1.min.js">
+	</script>
+	<script type="text/javascript">
+	
+		obj = 
+		{
+			xhr: new XMLHttpRequest(),
+			len: 0,
+			makeComet: function()
+			{
+				$("#ref").prop("disabled",true);
+				$("#ref").attr("class","btn btn-danger");
+				obj.xhr.onreadystatechange = obj.showUptTime;
+				obj.xhr.open("GET", "http://localhost/icc/P1/comet/xhrcomet.php", true);
+				obj.xhr.send();
+			},
+			showUptTime: function()
+			{
+				//alert("inside");
+				if (this.readyState == 3 && this.status == 200)
+				{
+					newdiv = document.getElementById("newdiv");
+					x = this.responseText.slice(obj.len);
+					//alert(x);
+					
+					
+					y=x.split('<br />');
+					
+					
+					tabR=document.getElementById("tab");
+					bod=document.getElementById("bod");
+					$("#bod").empty();
+				//	tabR.removeChild(bod);
+					
+				//	body=document.createElement("tb");
+					
+				//	body.setAttribute("id","bod");
+					/*newdiv.removeChild(tabR);
+					tab=document.createElement("table");
+					tab.setAttribute("id","tab");
+					newdiv.appendChild(tab);
+					header=document.createElement("th");
+					tab.appendChild(header);
+					*/
+					
+					
+					z=y.length-2;
+					runs=0;
+					for(i=0;i<z;i++)
+					{
+						//alert(y[i]);
+						row=document.createElement("tr");
+						arr=y[i].split('-');
+						//alert(arr.length);
+						for(j=0;j<arr.length;j++)
+						{
+							data=document.createElement("td");
+							data.innerHTML=arr[j];
+							row.appendChild(data);
+						}
+						strike=document.createElement("td");
+						runs+=parseInt(arr[1]);
+						strike.innerHTML=((arr[1]/arr[2])*100).toFixed(2);
+						row.appendChild(strike);
+						bod.appendChild(row);
+					}
+					rowB=document.createElement("tr");
+					for(i=0;i<arr.length;i++)
+					{
+						data=document.createElement("td");
+						data.innerHTML="-";
+						rowB.appendChild(data);
+					}
+					strike=document.createElement("td");
+					rowB.appendChild(strike);
+					bod.appendChild(rowB);
+					
+					
+					rowT=document.createElement("tr");
+					data=document.createElement("td");
+					data.innerHTML="TOTAL";
+					rowT.appendChild(data);
+					strike=document.createElement("td");
+					strike.innerHTML=runs;
+					rowT.appendChild(strike);
+					data=document.createElement("td");
+					rowT.appendChild(data);
+					data=document.createElement("td");
+					rowT.appendChild(data);
+					bod.appendChild(rowT);
+
+					rowT=document.createElement("tr");
+					data=document.createElement("td");
+					data.innerHTML="WICKETS";
+					rowT.appendChild(data);
+					strike=document.createElement("td");
+					strike.innerHTML=z-2;
+					rowT.appendChild(strike)
+					data=document.createElement("td");
+					rowT.appendChild(data);
+					data=document.createElement("td");
+					rowT.appendChild(data);
+					bod.appendChild(rowT);
+					
+					
+					
+		//			tabHead=document.getElementById("tabHead");
+					
+			//		tabHead.appendChild(bod);
+					
+					/*for(j=0;j<z;j++)
+					{
+						arr=y[0].split('-');
+						for(i=0;i<3;i++)
+						{
+							
+						}
+					}*/
+					
+				//	document.body.appendChild(newdiv);
+					obj.len = this.responseText.length;
+				}
+				else if(this.readyState == 4)
+				{
+					obj.makeComet();
+				}
+			}
+		};
+	</script>
+</head>
+<body style="text-align:center;vertical-align:middle">
+	<br/>
+	
+	<div class="container col-lg-8" style="opacity:1" id="newdiv">
+		<table id="tab" align="center" class="table-striped table-bordered" style="font-weight:bold;font-size:22px;">
+			<thead class="table-active table-inverse col-lg-12" id="tabHead">
+				<tr>
+				<td class="col-lg-2"> Name </td>
+				<td class="col-lg-2"> Runs </td>
+				<td class="col-lg-2"> Balls </td>
+				<td class="col-lg-2"> Strike </td>
+				</tr>
+			</thead>
+			
+			
+			<tbody id="bod">
+			</tbody>
+		</table>
+	</div>
+	<br/>
+	<input id="ref" class="btn btn-success" type="button" value="Auto Refresh" onclick="obj.makeComet()"/><p>
+</body>
+</html>

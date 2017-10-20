@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Binary Data Fetch </title> 
+<script type="text/javascript">
+/*Binary Data
+--> Videos
+--> Images
+--> Raw binary data
+*/
+function BinaryFetch()
+{
+	this.xhr = new XMLHttpRequest();
+	this.getVideo = function() {
+		this.xhr.onreadystatechange = this.showVideo;
+		this.xhr.responseType = "blob";//WHEN DEALING WITH BINARY DATA, THIS IS MANDATORY; blob - binary large object OR ArrayBuffer - huge array - fields can be modified
+		this.xhr.open("GET", "http://localhost//WT-II/Class/Class 11/getvideo.php", true);
+		this.xhr.send();
+	}
+	this.showVideo = function() {
+		if(this.readyState == 4 && this.status == 200)
+		{
+			vid = this.response;
+			video = document.createElement("video");
+			video.controls="true";
+			
+			url = URL.createObjectURL(vid);
+			video.src = url;
+			document.body.appendChild(video);
+		}
+	}
+}
+function init()
+{
+	obj = new BinaryFetch();
+	
+}
+
+</script>
+</head>
+<body onload="init()">
+	<input type="button" value="GET VIDEO" onclick="obj.getVideo()"/>
+</body>
+</html>
+
+

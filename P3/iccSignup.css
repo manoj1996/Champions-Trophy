@@ -1,0 +1,48 @@
+body.disp
+{
+	background-color : WhiteSmoke;
+	background-image : url("iccSignup.jpg");
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	text-align: center;
+	padding-left: 35%;
+	padding-right: 35%;
+	padding-top:50px;
+	font-family : candara;
+	font-size:16pt;
+}
+h1.login
+{
+	text-align : center;
+}
+div.disp
+{
+	display : block;
+}
+div.division
+{
+	border-style: solid;
+	border-radius: 40px;
+	border-width: 10px;
+	background-color: white;
+}
+body.signUp
+{
+	font-family: candara;
+	background-image : url("iccSignup.jpg");
+	background-size: 100% 100%;
+	background-repeat:no-repeat;
+	padding-left:30%;
+	padding-right:30%;
+	padding-top:100px;
+	font-size:16pt
+}	
+div.signUp
+{
+	background-color:white;
+	border-width:5px;
+	border-style: solid;
+	border-radius: 25px;
+	padding-top:25px;
+	padding-left:50px;
+}

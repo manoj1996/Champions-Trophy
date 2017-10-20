@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>ICC Fantasy League Login</title>
+<link rel="stylesheet" type = " text/css" href="iccSignup.css"/>
+<script type = "text/javascript">
+function send()
+{
+	xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = update;
+	uname = document.getElementById("uname");
+	paswd = document.getElementById("password");
+	xhr.open("GET","http://localhost:8000/polls/login?name="+uname.value+"&paswd="+paswd.value,true);
+	xhr.send();
+}
+function update()
+{
+	if(xhr.status == 200 && xhr.readyState == 4)
+	{
+		t = xhr.responseText;
+		if(t == "1")
+		{
+			alert("Success");
+			location.href  = "http://localhost/icc/P3/Fantasy.php";
+		}
+		else if(t == "2")
+		{
+			alert("Password doesn't match");
+		}
+		else
+		{
+			alert("Username doesn't exist");
+		}
+	}
+}
+</script>
+</head>
+<body class = "disp">
+<div class = "division">
+<h1 class = "login">ICC Fantasy League 2017</h1>
+<img src = "logo.png" width = "300px" height = "250px"/>
+<div class = "disp">
+<br/>
+<label> Username:<input type = "text" id = "uname" name = "uname" placeholder = "Username/Email" ></label><br/><br/>
+<label> Password :<input type = "password" id = "password" name = "password" placeholder = "Password"></label><br/><br/>
+<input type = "submit" name = "Submit" value = "Submit " onclick = "send()" />
+
+<br/>	
+<a href="sign.html"><h4>Sign Up</h4><a>
+</div>
+</div>
+
+</body>
+</html>
